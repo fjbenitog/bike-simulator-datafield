@@ -20,6 +20,11 @@ class TrackProfileScreen extends WatchUi.Drawable {
 	var zoom = true;
 	
 	var drawableTrackProfile;
+	
+	//Configuration
+	var gears = Application.getApp().getProperty("gears");
+	var powerSixe = Application.getApp().getProperty("power");
+	var level = Application.getApp().getProperty("level");
 
 
 	function initialize(options) {
@@ -55,7 +60,7 @@ class TrackProfileScreen extends WatchUi.Drawable {
 		drawableTrackProfile.distance = distance;
 		drawableTrackProfile.zoom = zoom;
 	    calculatePercentage();
-	    calculateEmulation(8,8,3);
+	    calculateEmulation(gears,powerSixe,level);
 	    drawFields(dc);
 
 	    drawableTrackProfile.draw(dc);

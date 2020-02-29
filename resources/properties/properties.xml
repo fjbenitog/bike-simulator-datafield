@@ -1,0 +1,5 @@
+<properties>
+    <property id="gears" type="number">10</property>
+    <property id="power" type="number">10</property>
+    <property id="level" type="number">1</property>
+</properties>
