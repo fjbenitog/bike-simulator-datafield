@@ -15,6 +15,10 @@
             <listEntry value="2">@Strings.covatilla</listEntry>
             <listEntry value="3">@Strings.medium</listEntry>
             <listEntry value="4">@Strings.long</listEntry>
+            <listEntry value="100">@Strings.custom</listEntry>
         </settingConfig>
+    </setting>
+    <setting propertyKey="@Properties.profile100" title="@Strings.custom">
+        <settingConfig type="alphaNumeric" readonly="false"/>
     </setting>
 </settings>    
