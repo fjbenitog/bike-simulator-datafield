@@ -20,12 +20,12 @@ class DrawableTrackProfile extends WatchUi.Drawable {
 	var distance;
 	
 	private function getTracks() {
-		var l = Application.getApp().getProperty("track1");
-		System.println("Track:"+(l+1));
-		if(l==2){
+		var selectedTrack = Application.getApp().getProperty("track");
+		System.println("Selected:"+selectedTrack);
+		if(selectedTrack==0){
 			return randomTrack();
 		}else{
-			return generate("profile"+(l+1));
+			return generate("profile"+selectedTrack);
 		}
 
 	}	
