@@ -1,11 +1,20 @@
 <settings>
     <setting propertyKey="@Properties.gears" title="@Strings.gears">
-        <settingConfig type="numeric" readonly="true" min="1" max="20"/>
+        <settingConfig type="numeric" readonly="false" min="1" max="20"/>
     </setting>
     <setting propertyKey="@Properties.power" title="@Strings.power">
-        <settingConfig type="numeric" readonly="true" min="1" max="100"/>
+        <settingConfig type="numeric" readonly="false" min="1" max="100"/>
     </setting>
     <setting propertyKey="@Properties.level" title="@Strings.level">
-        <settingConfig type="numeric" readonly="true" min="1" max="5"/>
+        <settingConfig type="numeric" readonly="false" min="1" max="5"/>
+    </setting>
+    <setting propertyKey="@Properties.track1" title="@Strings.tracks">
+        <settingConfig type="list">
+            <listEntry value="0">@Strings.covatilla</listEntry>
+            <listEntry value="1">@Strings.morcan</listEntry>
+            <listEntry value="2">@Strings.random</listEntry>
+            <listEntry value="3">@Strings.medium</listEntry>
+            <listEntry value="4">@Strings.custom</listEntry>
+        </settingConfig>
     </setting>
 </settings>    

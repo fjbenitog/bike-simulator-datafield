@@ -18,8 +18,44 @@ class DrawableTrackProfile extends WatchUi.Drawable {
 	var initialPercentage = 0;
 	
 	var distance;
+	
+	private function getTracks() {
+		var l = Application.getApp().getProperty("track1");
+		System.println("Track:"+(l+1));
+		if(l==2){
+			return randomTrack();
+		}else{
+			return generate("profile"+(l+1));
+		}
+
+	}	
+	
+	private function generate(profile) {
+		var total = Application.getApp().getProperty(profile);
+		var initial = parser(total);
+		var accu = [initial[1]];
+		var left = initial[0];
+		while(left.length()>0){
+			var result = parser(left);
+			accu.add(result[1]);
+			left =result[0];
+		}
+		return accu;
+	}
+	
+	private function parser(value) {
+		var position = value.find(",");
+		if(position == null){ 
+			return ["",value.toNumber()];
+		}else{
+			var percentage = value.substring(0, position);
+			var left = value.substring(position+1, value.length());
+			return [left,percentage.toNumber()];
+		}
+	}
+					
 	 
-	var track = new Track(randomTrack());
+	var track = new Track(getTracks()); 
 
 	function initialize(options) {
 	    Drawable.initialize(options);
