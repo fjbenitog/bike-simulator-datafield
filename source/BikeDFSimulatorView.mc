@@ -48,8 +48,8 @@ class BikeDFSimulatorView extends WatchUi.DataField {
     	if(distance == null || distance<0){ 
     		distance = 0;
     	}
-    	//return distance/1000;
-    	return distance/50;
+    	return distance/1000;
+    	//return distance/50;
     } 
     
     
