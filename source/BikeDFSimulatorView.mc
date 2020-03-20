@@ -1,9 +1,14 @@
 using Toybox.WatchUi;
+using Toybox.Attention;
 
 class BikeDFSimulatorView extends WatchUi.DataField {
 
-	hidden var distance = 0;
-	hidden var percentage = 0;
+	private var distance = 0;
+	private var lastKm = 0;
+	private var time = 0;
+	private var lastTime = 0;
+	private var alert = false;
+	private var alertDuration = 2000;
 	
 
     // Set the label of the data field here.
@@ -20,13 +25,15 @@ class BikeDFSimulatorView extends WatchUi.DataField {
     // Note that compute() and onUpdate() are asynchronous, and there is no
     // guarantee that compute() will be called before onUpdate().
     function compute(info) {
+    	time = info.timerTime;
     	distance = distanceInKm(info);
- 		percentage = distanceInKm(info);
     }
     
     function onUpdate(dc) {
         var trackProfileScreen = View.findDrawableById("TrackProfileScreen");
+        checkAlert();       
         trackProfileScreen.distance = distance;
+        trackProfileScreen.alerting = alert;
         View.onUpdate(dc);
     }
     
@@ -36,19 +43,40 @@ class BikeDFSimulatorView extends WatchUi.DataField {
         View.onShow();
     }
     
-    
-    function meterDistance(info){
+    function distanceInKm(info){
     	var distance = info.elapsedDistance;
     	if(distance == null || distance<0){ 
     		distance = 0;
     	}
-    	return distance;
-    }
+    	//return distance/1000;
+    	return distance/50;
+    } 
     
-    function distanceInKm(info){
-//    	return meterDistance(info)/1000;
-    	return meterDistance(info)/50;
-    }    
+    
+    function checkAlert(){
+    	var currentKm = distance.toLong();
+    	if(currentKm - lastKm == 1){
+    		alert = true;
+    		lastKm = currentKm;
+    		lastTime = time;
+	    	if(Attention has :playTone){
+				Attention.playTone(Attention.TONE_DISTANCE_ALERT);
+			}
+			if (Attention has :vibrate) {
+				var vibeData =
+					[
+						new Attention.VibeProfile(50, alertDuration)
+					];
+				Attention.vibrate(vibeData);
+			}
+    	}
+    	if(alert && (time  - lastTime) > alertDuration){
+        	lastTime = time;
+        	alert = false;
+        }
+	}
+    
+       
     
 
 }

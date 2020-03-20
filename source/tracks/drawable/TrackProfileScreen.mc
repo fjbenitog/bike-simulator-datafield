@@ -18,6 +18,7 @@ class TrackProfileScreen extends WatchUi.Drawable {
 	var gear = 0;
 	
 	var zoom = true;
+	var alerting = false;
 	
 	var drawableTrackProfile;
 	
@@ -53,17 +54,34 @@ class TrackProfileScreen extends WatchUi.Drawable {
         	:padding	=> 10,
         	:font		=> Graphics.FONT_SYSTEM_TINY
         	}); 
-
 	}
 	 
 	function draw(dc) {
-		drawableTrackProfile.distance = distance;
-		drawableTrackProfile.zoom = zoom;
-	    calculatePercentage();
-	    calculateEmulation(gears,powerSixe,level);
-	    drawFields(dc);
-
-	    drawableTrackProfile.draw(dc);
+		if(alerting){
+	    	drawAlerting(dc);
+		}else{
+			drawableTrackProfile.distance = distance;
+			drawableTrackProfile.zoom = zoom;
+		    calculatePercentage();
+		    calculateEmulation(gears,powerSixe,level);
+		    drawFields(dc);
+		    drawableTrackProfile.draw(dc);
+	    }
+	}
+	
+	private function drawAlerting(dc){
+		var heightFont = Graphics.getFontHeight(Graphics.FONT_SYSTEM_MEDIUM);
+		var heightNumberFont = Graphics.getFontHeight(Graphics.FONT_NUMBER_MEDIUM);
+    	dc.setColor(Graphics.COLOR_WHITE, Graphics.Graphics.COLOR_TRANSPARENT);
+    	dc.drawText(dc.getWidth()/2, dc.getHeight()/8, Graphics.FONT_SYSTEM_MEDIUM,
+    		 WatchUi.loadResource(Rez.Strings.powerLabel).toUpper() + ":", Graphics.TEXT_JUSTIFY_CENTER);
+    	dc.drawText(dc.getWidth()/2, dc.getHeight()/8 + heightFont,
+    		 Graphics.FONT_NUMBER_MEDIUM, power, Graphics.TEXT_JUSTIFY_CENTER);
+    		 
+    	dc.drawText(dc.getWidth()/2, dc.getHeight()/8 + heightFont + heightNumberFont, Graphics.FONT_SYSTEM_MEDIUM, 
+    		WatchUi.loadResource(Rez.Strings.maxGear).toUpper() + ":", Graphics.TEXT_JUSTIFY_CENTER);
+    	dc.drawText(dc.getWidth()/2, dc.getHeight()/8 + heightNumberFont + 2 * heightFont,
+    		 Graphics.FONT_NUMBER_MEDIUM, gear, Graphics.TEXT_JUSTIFY_CENTER);
 	}
 	
 	private function drawFields(dc){

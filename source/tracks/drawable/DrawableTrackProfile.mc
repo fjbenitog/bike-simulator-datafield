@@ -21,7 +21,6 @@ class DrawableTrackProfile extends WatchUi.Drawable {
 	
 	private function getTracks() {
 		var selectedTrack = Application.getApp().getProperty("track");
-		System.println("Selected:"+selectedTrack);
 		if(selectedTrack==0){
 			return randomTrack();
 		}else{
