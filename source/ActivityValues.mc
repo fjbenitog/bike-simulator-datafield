@@ -4,8 +4,8 @@ module ActivityValues{
 	 var lastKm = 0;
 	 var time = 0;
 	 var lastTime = 0;
-	 var alert = true;
+	 var alert = false;
 	 var alertDuration = 2000;
-	 var zoom = false;
+	 var zoom = true;
 	
 }
