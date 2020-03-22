@@ -1,0 +1,7 @@
+<resources>
+	<layout id="ProfileTrackView">
+		<drawable id="TrackProfileScreen" class="TrackProfileScreen">
+		<param name="margingBottom">15</param>
+		</drawable>
+	</layout>	
+</resources>

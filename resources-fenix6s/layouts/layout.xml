@@ -1,0 +1,8 @@
+<resources>
+	<layout id="ProfileTrackView">
+		<drawable id="TrackProfileScreen" class="TrackProfileScreen">
+			<param name="fontField">Graphics.FONT_SYSTEM_XTINY</param>
+			<param name="fontNumber">Graphics.FONT_SYSTEM_MEDIUM</param>
+		</drawable>
+	</layout>
+</resources>

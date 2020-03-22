@@ -1,0 +1,15 @@
+<strings>
+    <string id="AppName">Bike Simulator DF</string>
+    <string id="maxGear">Max Gear</string>
+    <string id="powerLabel">Resistan.</string>
+    <string id="gears">Gears</string>
+    <string id="power">Power Size</string>
+    <string id="level">Level</string>
+    <string id="tracks">Tracks</string>
+    <string id="covatilla">La Covatilla</string>
+    <string id="morcan">Morcuera - Canencia</string>
+    <string id="random">Random</string>
+    <string id="medium">Medium</string>
+    <string id="long">Long</string>
+    <string id="custom">Custom</string>
+</strings>

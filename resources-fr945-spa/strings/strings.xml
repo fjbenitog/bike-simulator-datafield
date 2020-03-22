@@ -1,0 +1,15 @@
+<strings>
+    <string id="AppName">Bike Simulator DF</string>
+    <string id="maxGear">Max. March.</string>
+    <string id="powerLabel">Resistencia</string>
+    <string id="gears">Marchas</string>
+    <string id="power">Tamaño Resistencia</string>
+    <string id="level">Nivel</string>
+    <string id="tracks">Etapas</string>
+    <string id="covatilla">La Covatilla</string>
+    <string id="morcan">Morcuera - Canencia</string>
+    <string id="random">Aleatoria</string>
+    <string id="medium">Medium</string>
+    <string id="long">Long</string>
+    <string id="custom">Editable</string>
+</strings>

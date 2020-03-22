@@ -2,14 +2,7 @@ using Toybox.WatchUi;
 using Toybox.Attention;
 
 class BikeDFSimulatorView extends WatchUi.DataField {
-
-	private var distance = 0;
-	private var lastKm = 0;
-	private var time = 0;
-	private var lastTime = 0;
-	private var alert = false;
-	private var alertDuration = 2000;
-	
+	 
 
     // Set the label of the data field here.
     function initialize() {
@@ -25,23 +18,23 @@ class BikeDFSimulatorView extends WatchUi.DataField {
     // Note that compute() and onUpdate() are asynchronous, and there is no
     // guarantee that compute() will be called before onUpdate().
     function compute(info) {
-    	time = info.timerTime;
-    	distance = distanceInKm(info);
+    	ActivityValues.time = info.timerTime;
+    	ActivityValues.distance = distanceInKm(info);
     }
     
     function onUpdate(dc) {
         var trackProfileScreen = View.findDrawableById("TrackProfileScreen");
         checkAlert();       
-        trackProfileScreen.distance = distance;
-        trackProfileScreen.alerting = alert;
         View.onUpdate(dc);
     }
     
     function onShow() {
     	var trackProfileScreen = View.findDrawableById("TrackProfileScreen");
-        trackProfileScreen.changeZoom();
+        changeZoom();
         View.onShow();
     }
+    
+
     
     function distanceInKm(info){
     	var distance = info.elapsedDistance;
@@ -54,29 +47,31 @@ class BikeDFSimulatorView extends WatchUi.DataField {
     
     
     function checkAlert(){
-    	var currentKm = distance.toLong();
-    	if(currentKm - lastKm == 1){
-    		alert = true;
-    		lastKm = currentKm;
-    		lastTime = time;
+    	var currentKm = ActivityValues.distance.toLong();
+    	if(currentKm - ActivityValues.lastKm == 1){
+    		ActivityValues.alert = true;
+    		ActivityValues.lastKm = currentKm;
+    		ActivityValues.lastTime = ActivityValues.time;
 	    	if(Attention has :playTone){
 				Attention.playTone(Attention.TONE_DISTANCE_ALERT);
 			}
 			if (Attention has :vibrate) {
 				var vibeData =
 					[
-						new Attention.VibeProfile(50, alertDuration)
+						new Attention.VibeProfile(50, ActivityValues.alertDuration)
 					];
 				Attention.vibrate(vibeData);
 			}
     	}
-    	if(alert && (time  - lastTime) > alertDuration){
-        	lastTime = time;
-        	alert = false;
+    	if(ActivityValues.alert && (ActivityValues.time  - ActivityValues.lastTime) > ActivityValues.alertDuration){
+        	ActivityValues.lastTime = ActivityValues.time;
+        	ActivityValues.alert = false;
         }
 	}
     
        
-    
+    function changeZoom(){
+		ActivityValues.zoom = !ActivityValues.zoom;
+	}
 
 }

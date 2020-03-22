@@ -9,16 +9,14 @@ class TrackProfileScreen extends WatchUi.Drawable {
 	var fontField = Graphics.FONT_SYSTEM_XTINY;
 	var marginField = 0;
 	var margingBottom = 0;
+	var padding = 10;
 	
-	var distance = 0;
 	var percentage = 0;
 	
 	
 	var power = 0;
 	var gear = 0;
 	
-	var zoom = true;
-	var alerting = false;
 	
 	var drawableTrackProfile;
 	
@@ -57,13 +55,11 @@ class TrackProfileScreen extends WatchUi.Drawable {
 	}
 	 
 	function draw(dc) {
-		if(alerting){
+		calculatePercentage();
+		calculateEmulation(gears,powerSixe,level);
+		if(ActivityValues.alert){
 	    	drawAlerting(dc);
 		}else{
-			drawableTrackProfile.distance = distance;
-			drawableTrackProfile.zoom = zoom;
-		    calculatePercentage();
-		    calculateEmulation(gears,powerSixe,level);
 		    drawFields(dc);
 		    drawableTrackProfile.draw(dc);
 	    }
@@ -95,7 +91,7 @@ class TrackProfileScreen extends WatchUi.Drawable {
 			fontField, WatchUi.loadResource(Rez.Strings.powerLabel).toUpper(), Graphics.TEXT_JUSTIFY_RIGHT);
 		dc.drawText(dc.getWidth()/2 + 10, base - Graphics.getFontHeight(fontField), 
 			fontField, WatchUi.loadResource(Rez.Strings.maxGear).toUpper(), Graphics.TEXT_JUSTIFY_LEFT);
-		if(distance>0){
+		if(ActivityValues.distance>0){
 		    
 		    dc.drawText(dc.getWidth()/2 - 10, base - Graphics.getFontHeight(fontField)  - Graphics.getFontHeight(fontNumber) - marginField/2, 
 				fontNumber, power, Graphics.TEXT_JUSTIFY_RIGHT);
@@ -110,10 +106,10 @@ class TrackProfileScreen extends WatchUi.Drawable {
     
     private function calculatePercentage(){
     	var profile = drawableTrackProfile.track.profile;
-    	if(distance <=0 || distance>=profile.size()){
+    	if(ActivityValues.distance <=0 || ActivityValues.distance>=profile.size()){
     		percentage = 0;
     	}else{
-    		percentage= profile[distance.toNumber()];
+    		percentage= profile[ActivityValues.distance.toNumber()];
 		}
     }
     
@@ -131,10 +127,7 @@ class TrackProfileScreen extends WatchUi.Drawable {
 		}
 	}
 	
-	function changeZoom(){
-		zoom = !zoom;
-		return zoom;
-	}
+
     
 
 

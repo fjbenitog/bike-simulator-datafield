@@ -1,0 +1,11 @@
+<resources>
+	<layout id="ProfileTrackView">
+		<drawable id="TrackProfileScreen" class="TrackProfileScreen">
+			<param name="fontField">Graphics.FONT_SYSTEM_MEDIUM</param>
+			<param name="fontKms">Graphics.FONT_SYSTEM_MEDIUM</param>
+			<param name="fontPercentage">Graphics.FONT_SYSTEM_MEDIUM</param>
+			<param name="marginField">5</param>
+			<param name="margingBottom">25</param>
+		</drawable>
+	</layout>	
+</resources>

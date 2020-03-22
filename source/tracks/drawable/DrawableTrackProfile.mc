@@ -14,10 +14,8 @@ class DrawableTrackProfile extends WatchUi.Drawable {
 	var height;
 	var padding = 0;
 	var font = Graphics.FONT_XTINY;
-	var zoom = false;
 	var initialPercentage = 0;
 	
-	var distance;
 	
 	private function getTracks() {
 		var selectedTrack = Application.getApp().getProperty("track");
@@ -98,7 +96,7 @@ class DrawableTrackProfile extends WatchUi.Drawable {
 	function draw(dc) {
 		
 		var totalDistance =  drawPoints.size();
-		var calculatedPointsAndDistance = selectPoints(distance);
+		var calculatedPointsAndDistance = selectPoints(ActivityValues.distance);
 		var virtualdrawPoints = calculatedPointsAndDistance[0];
 		var currentDistance = calculatedPointsAndDistance[1];
 		var startKm = calculatedPointsAndDistance[2];
@@ -116,9 +114,9 @@ class DrawableTrackProfile extends WatchUi.Drawable {
     	
     	drawCursor(cursor,dc);
     	
-		if(zoom){
+		if(ActivityValues.zoom){
 	    	dc.setColor(Graphics.COLOR_DK_GREEN, Graphics.COLOR_TRANSPARENT);
-			dc.drawText(x + width/2, y + padding/2, Graphics.FONT_SYSTEM_TINY, "Z:[ " + printDistance(distance) + "/" +totalDistance + " Kms ]", Graphics.TEXT_JUSTIFY_CENTER);
+			dc.drawText(x + width/2, y + padding/2, font, "Z:[ " + printDistance(ActivityValues.distance) + "/" +totalDistance + " Kms ]", Graphics.TEXT_JUSTIFY_CENTER);
 			
     	}else{
     		dc.setColor(Graphics.COLOR_DK_GREEN, Graphics.COLOR_TRANSPARENT);
@@ -195,7 +193,7 @@ class DrawableTrackProfile extends WatchUi.Drawable {
 	}
 	
 	private function calculateKmMark(size){
-		if(zoom){
+		if(ActivityValues.zoom){
 			return 2;
 		}else{
 			return (size/4);
@@ -213,7 +211,7 @@ class DrawableTrackProfile extends WatchUi.Drawable {
 	
 	private function selectPoints(currentDistance){
 		var virtualDistance = currentDistance;
-		if(zoom){
+		if(ActivityValues.zoom){
 			var zoomDistance = 5;
 			var startPoint = currentDistance.toLong() - zoomDistance;
 			var endPoint = currentDistance.toLong() + zoomDistance;
